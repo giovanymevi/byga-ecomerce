@@ -48,7 +48,7 @@ function displayProducts() {
             <div class="product-info">
                 <h3 class="product-name">${product.name}</h3>
                 <p class="product-category">${product.category}</p>
-                <p class="product-price">$${product.price.toFixed(2)}</p>
+                <p class="product-price">${product.price.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</p>
                 <p class="product-stock">Stock: ${product.stock}</p>
                 <button onclick="addToCart(${product.id})" class="btn-add-cart" ${product.stock === 0 ? 'disabled' : ''}>
                     ${product.stock > 0 ? 'Agregar al Carrito' : 'Sin Stock'}

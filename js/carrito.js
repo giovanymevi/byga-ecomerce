@@ -112,7 +112,7 @@ function updateCartSidebar() {
                     <img src="${item.image}" alt="${item.name}" class="cart-item-image">
                     <div class="cart-item-info">
                         <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                        <div class="cart-item-price">${item.price.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</div>
                         <div class="cart-item-quantity">
                             <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
                             <span>${item.quantity}</span>
@@ -126,7 +126,7 @@ function updateCartSidebar() {
             `).join('')}
         </div>
         <div class="cart-total">
-            Total: $${total.toFixed(2)}
+            Total: ${total.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}
         </div>
         <button class="btn-checkout" onclick="checkout()">Proceder al Pago</button>
     `;
