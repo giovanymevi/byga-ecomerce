@@ -1,13 +1,29 @@
+html, body {
+    overflow-x: hidden;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --primary-color: #ffd700; /* Amarillo */
+    --secondary-color: #1a1a1a; /* Negro */
+    --darker-primary: #e6c200;
+    --text-on-primary: #1a1a1a;
+    --text-on-secondary: #ffffff;
+    --background-light: #f9f9f9;
+    --background-white: #ffffff;
+    --text-dark: #333;
+    --border-color: #ddd;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: var(--text-dark);
 }
 
 /* Navbar */
@@ -28,7 +44,7 @@ body {
 .logo h1 {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #e74c3c;
+    color: var(--primary-color);
 }
 
 .nav-icons {
@@ -38,14 +54,14 @@ body {
 }
 
 .nav-links a {
-    color: white;
+    color: var(--text-on-secondary);
     text-decoration: none;
     margin: 0 1rem;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #e74c3c;
+    color: var(--primary-color);
 }
 
 /* Dropdown Menu */
@@ -69,7 +85,7 @@ body {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #34495e;
+    background-color: #2a2a2a;
     min-width: 200px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     z-index: 1;
@@ -78,7 +94,7 @@ body {
 }
 
 .dropdown-menu a {
-    color: white;
+    color: var(--text-on-secondary);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -98,8 +114,8 @@ body {
     position: absolute;
     top: -10px;
     right: -10px;
-    background: #e74c3c;
-    color: white;
+    background: var(--primary-color);
+    color: var(--text-on-primary);
     border-radius: 50%;
     padding: 0.2rem 0.5rem;
     font-size: 0.8rem;
@@ -121,8 +137,8 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: var(--secondary-color);
+    color: var(--text-on-secondary);
     text-align: center;
     padding: 150px 20px 100px;
     margin-top: 60px;
@@ -141,8 +157,8 @@ body {
 }
 
 .btn-primary {
-    background: #e74c3c;
-    color: white;
+    background: var(--primary-color);
+    color: var(--text-on-primary);
     border: none;
     padding: 1rem 2rem;
     font-size: 1.1rem;
@@ -152,7 +168,7 @@ body {
 }
 
 .btn-primary:hover {
-    background: #c0392b;
+    background: var(--darker-primary);
 }
 
 /* Particles */
@@ -205,7 +221,7 @@ body {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
-    color: #2c3e50;
+    color: var(--secondary-color);
 }
 
 .category-grid {
@@ -232,14 +248,14 @@ body {
 
 .category-card i {
     font-size: 2.5rem;
-    color: #e74c3c;
+    color: var(--primary-color);
     margin-bottom: 1rem;
 }
 
 /* Products Section */
 .products {
     padding: 4rem 5%;
-    background: #f9f9f9;
+    background: var(--background-light);
 }
 
 .filters {
@@ -251,7 +267,7 @@ body {
 
 .filters select {
     padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
@@ -292,7 +308,7 @@ body {
 .product-name {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
-    color: #2c3e50;
+    color: var(--secondary-color);
 }
 
 .product-category {
@@ -304,7 +320,7 @@ body {
 .product-price {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #e74c3c;
+    color: var(--primary-color);
     margin-bottom: 1rem;
 }
 
@@ -315,8 +331,8 @@ body {
 }
 
 .btn-add-cart {
-    background: #2c3e50;
-    color: white;
+    background: var(--secondary-color);
+    color: var(--text-on-secondary);
     border: none;
     padding: 0.8rem 1.5rem;
     width: 100%;
@@ -326,7 +342,8 @@ body {
 }
 
 .btn-add-cart:hover:not(:disabled) {
-    background: #e74c3c;
+    background: var(--primary-color);
+    color: var(--text-on-primary);
 }
 
 /* Pagination */
@@ -339,8 +356,8 @@ body {
 
 .pagination button {
     padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
-    background: white;
+    border: 1px solid var(--border-color);
+    background: var(--background-white);
     cursor: pointer;
     border-radius: 5px;
     transition: all 0.3s;
@@ -348,28 +365,30 @@ body {
 
 .pagination button:hover,
 .pagination button.active {
-    background: #e74c3c;
-    color: white;
-    border-color: #e74c3c;
+    background: var(--primary-color);
+    color: var(--text-on-primary);
+    border-color: var(--primary-color);
 }
 
 /* Carrito Flotante */
 .cart-sidebar {
     position: fixed;
     top: 0;
-    right: -400px;
-    width: 400px;
+    right: 0;
+    width: 90vw;
+    max-width: 400px;
     height: 100vh;
-    background: white;
+    background: var(--background-white);
     box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-    transition: right 0.3s;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
     z-index: 1001;
     padding: 1.5rem;
     overflow-y: auto;
 }
 
 .cart-sidebar.active {
-    right: 0;
+    transform: translateX(0);
 }
 
 .cart-header {
@@ -418,7 +437,7 @@ body {
 }
 
 .cart-item-price {
-    color: #e74c3c;
+    color: var(--primary-color);
     font-weight: 700;
 }
 
@@ -465,8 +484,8 @@ body {
 
 /* Footer */
 footer {
-    background: #2c3e50;
-    color: white;
+    background: var(--secondary-color);
+    color: var(--text-on-secondary);
     padding: 3rem 5% 1rem;
 }
 
@@ -486,20 +505,20 @@ footer {
 }
 
 .social-links a {
-    color: white;
+    color: var(--text-on-secondary);
     font-size: 1.5rem;
     margin-right: 1rem;
     transition: color 0.3s;
 }
 
 .social-links a:hover {
-    color: #e74c3c;
+    color: var(--primary-color);
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
-    border-top: 1px solid #34495e;
+    border-top: 1px solid #3a3a3a;
 }
 
 /* Keyframes */
@@ -524,7 +543,7 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background: #34495e;
+        background: #2a2a2a;
         flex-direction: column;
         align-items: center;
         padding: 1rem 0;
@@ -535,7 +554,7 @@ footer {
     }
 
     .nav-links.active {
-        max-height: 300px; /* Adjust as needed */
+        max-height: 50vh; /* Adjust as needed */
         padding: 1rem 0;
     }
 
