@@ -173,22 +173,36 @@ async function checkout() {
         return;
     }
 
-    // Aquí puedes integrar con Supabase para guardar el pedido
-    const order = {
-        items: cart,
-        total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
-        date: new Date(),
-        status: 'pending'
-    };
+    const phoneNumber = '584247423318'; // Número de WhatsApp de la tienda
 
-    // Simular proceso de pago
-    showNotification('Procesando pago...', 'success');
+    // Construir el mensaje con los detalles del pedido
+    let message = '¡Hola Calzados Byga! 👋\n\nQuisiera realizar el siguiente pedido:\n\n';
+
+    cart.forEach(item => {
+        const itemPrice = item.price.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' });
+        message += `*Producto:* ${item.name}\n`;
+        message += `*Cantidad:* ${item.quantity}\n`;
+        message += `*Precio Unitario:* ${itemPrice}\n\n`;
+    });
+
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const totalFormatted = total.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' });
+    message += `*Total a Pagar: ${totalFormatted}*\n\n`;
+    message += 'Para la entrega, por favor, indícame tu dirección. 🚚\n\n';
+    message += '¡Quedo a la espera de tu respuesta para coordinar el pago y envío!';
+
+    // Codificar el mensaje para la URL y crear el enlace de WhatsApp
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    // Redirigir a WhatsApp en una nueva pestaña y limpiar el carrito localmente
+    window.open(whatsappURL, '_blank');
+    showNotification('Te estamos redirigiendo a WhatsApp para completar tu pedido...', 'success');
     
     setTimeout(() => {
         cart = [];
         saveCart();
         updateCartUI();
         toggleCart();
-        showNotification('¡Compra realizada con éxito!', 'success');
     }, 2000);
 }
