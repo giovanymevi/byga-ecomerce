@@ -63,7 +63,8 @@ function displayProducts() {
 // Función para mostrar categorías
 function displayCategories() {
     const categoryGrid = document.getElementById('categoryGrid');
-    if (!categoryGrid) return;
+    const navDropdown = document.getElementById('nav-categories-dropdown');
+    if (!categoryGrid && !navDropdown) return;
 
     const categories = [...new Set(currentProducts.map(p => p.category))];
     const categoryIcons = {
@@ -76,12 +77,21 @@ function displayCategories() {
         'Infantil': 'fa-child'
     };
 
-    categoryGrid.innerHTML = categories.map(category => `
-        <div class="category-card" onclick="filterByCategory('${category}')">
-            <i class="fas ${categoryIcons[category] || 'fa-shoe-prints'}"></i>
-            <h3>${category}</h3>
-        </div>
-    `).join('');
+    if (categoryGrid) {
+        categoryGrid.innerHTML = categories.map(category => `
+            <div class="category-card" onclick="filterByCategory('${category}')">
+                <i class="fas ${categoryIcons[category] || 'fa-shoe-prints'}"></i>
+                <h3>${category}</h3>
+            </div>
+        `).join('');
+    }
+
+    if (navDropdown) {
+        // Populate the navbar dropdown
+        navDropdown.innerHTML = categories.map(category => 
+            `<a href="#productos" onclick="filterByCategoryAndScroll('${category}')">${category}</a>`
+        ).join('');
+    }
 }
 
 // Función para mostrar paginación
@@ -110,6 +120,21 @@ function changePage(page) {
 function filterByCategory(category) {
     document.getElementById('categoryFilter').value = category;
     filterProducts();
+}
+
+// Función para filtrar desde el menú y hacer scroll
+function filterByCategoryAndScroll(category) {
+    filterByCategory(category);
+    scrollToProducts();
+
+    // Cerrar menú móvil si está abierto
+    if (window.innerWidth <= 768) {
+        const navLinks = document.getElementById('nav-links');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        navLinks.classList.remove('active');
+        dropdownMenu.classList.remove('active');
+        document.querySelector('.dropdown-toggle i').classList.remove('rotated');
+    }
 }
 
 // Función para filtrar productos

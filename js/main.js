@@ -9,6 +9,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Lógica para el menú desplegable en móviles
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    if (dropdownToggle) {
+        dropdownToggle.addEventListener('click', (e) => {
+            // En pantallas móviles, prevenir el comportamiento del enlace y mostrar/ocultar el submenú
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const dropdownMenu = dropdownToggle.nextElementSibling;
+                dropdownMenu.classList.toggle('active');
+                dropdownToggle.querySelector('i').classList.toggle('rotated');
+            }
+        });
+    }
+
     // Lógica para el slider de publicidad
     const slides = document.querySelector('.slides');
     if (slides) {
